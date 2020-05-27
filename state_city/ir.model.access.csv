@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_state_city,access_res_state_city,model_res_state_city,,1,1,1,1
+access_res_country_state,access_res_country_state,model_res_country_state,,1,1,1,1
+access_res_city_kecamatan,access_res_city_kecamatan,model_res_city_kecamatan,,1,1,1,1
+access_res_kecamatan_kelurahan,access_res_kecamatan_kelurahan,model_res_kecamatan_kelurahan,,1,1,1,1

@@ -1,0 +1,98 @@
+<odoo>
+
+	<record model="ir.ui.view" id="view_kecamatan_kelurahan_form">
+		<field name="name">Kelurahan</field>
+		<field name="model">res.kecamatan.kelurahan</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" required="1" />
+				<field name="desa" required="1" />
+				<field name="kecamatan_id" required="1" />
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_city_kecamatan_form">
+		<field name="name">Kecamatan</field>
+		<field name="model">res.city.kecamatan</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" required="1" />
+				<field name="code" required="1" />
+				<field name="city_id" required="1" />
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_state_city_form">
+		<field name="name">Kabupaten/Kota</field>
+		<field name="model">res.state.city</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" required="1" />
+				<field name="code" required="1" />
+				<field name="state_id" required="1" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_state_form" model="ir.ui.view">
+		<field name="name">Propinsi</field>
+		<field name="model">res.country.state</field>
+		<field name="arch" type="xml">
+			<form>
+				<group col="4">
+					<field name="country_id" />
+					<field name="name" />
+					<field name="code" />
+				</group>
+				<field name="city_ids">
+					<tree>
+						<field name="name" />
+						<field name="code" />
+					</tree>
+				</field>
+			</form>
+		</field>
+	</record>
+
+    <record id="view_state_search" model="ir.ui.view">
+        <field name="name">Propinsi Search</field>
+        <field name="model">res.country.state</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="country_indonesia" string="Indonesia"
+                        domain="[('country_id.name', '=', 'Indonesia')]"/>
+            </search>
+        </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_view_state">
+		<field name="name">Propinsi</field>
+		<field name="res_model">res.country.state</field>
+		<field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_country_indonesia':1}"/>
+	</record>
+
+	<act_window id="action_view_country" name="Negara"
+		res_model="res.country" view_mode="tree,form" />
+	<act_window id="action_view_city" name="Kabupaten/Kota"
+		res_model="res.state.city" view_mode="tree,form" />
+	<act_window id="action_view_kecamatan" name="Kecamatan"
+		res_model="res.city.kecamatan" view_mode="tree,form" />
+	<act_window id="action_view_kelurahan" name="Kelurahan"
+		res_model="res.kecamatan.kelurahan" view_mode="tree,form" />
+
+	<menuitem id="menu_res_country" name="Country" parent="base.menu_custom" />
+	<menuitem id="sub_menu_res_country" name="Country" parent="menu_res_country"
+		action="action_view_city" />
+	<menuitem id="menu_res_country_state" name="State"
+		parent="menu_res_country" action="action_view_state" />
+	<menuitem id="menu_res_state_city" name="City"
+		parent="menu_res_country" action="action_view_city" />
+	<menuitem id="menu_res_city_kecamatan" name="Kecamatan"
+		parent="menu_res_country" action="action_view_kecamatan" />
+	<menuitem id="menu_res_kecamatan_kelurahan" name="Kelurahan"
+		parent="menu_res_country" action="action_view_kelurahan" />
+
+</odoo>
