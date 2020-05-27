@@ -4,6 +4,7 @@
 'author':'Chairul Umam, Erlangga Indra Permana, & Fadhlullah',
 'website':'https://erlaangga.github.io',
 'category': 'Tools',
+'license': 'LGPL-3',
 'depends':['base'],
 'data':[
         'ir.model.access.csv',
