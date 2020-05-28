@@ -1,7 +1,7 @@
 {
 'name':'Kota',
 'summary':'Adding city and district data',
-'author':'Chairul Umam, Erlangga Indra Permana, & Fadhlullah',
+'author':'Chairul Umam, Erlangga Indra Permana, Fadhlullah',
 'website':'https://erlaangga.github.io',
 'category': 'Tools',
 'license': 'LGPL-3',
