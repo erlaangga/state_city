@@ -61,6 +61,7 @@
         <field name="model">res.country.state</field>
         <field name="arch" type="xml">
             <search>
+            	<field name="country_id" />
                 <filter name="country_indonesia" string="Indonesia"
                         domain="[('country_id.name', '=', 'Indonesia')]"/>
             </search>
@@ -74,18 +75,25 @@
         <field name="context" eval="{'search_default_country_indonesia':1}"/>
 	</record>
 
-	<act_window id="action_view_country" name="Negara"
-		res_model="res.country" view_mode="tree,form" />
-	<act_window id="action_view_city" name="Kabupaten/Kota"
-		res_model="res.state.city" view_mode="tree,form" />
-	<act_window id="action_view_kecamatan" name="Kecamatan"
-		res_model="res.city.kecamatan" view_mode="tree,form" />
-	<act_window id="action_view_kelurahan" name="Kelurahan"
-		res_model="res.kecamatan.kelurahan" view_mode="tree,form" />
+	<record model="ir.actions.act_window" id="action_view_city">
+		<field name="name">Kabupaten/Kota</field>
+		<field name="res_model">res.state.city</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_view_kecamatan">
+		<field name="name">Kecamatan</field>
+		<field name="res_model">res.city.kecamatan</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_view_kelurahan">
+		<field name="name">Kelurahan</field>
+		<field name="res_model">res.kecamatan.kelurahan</field>
+		<field name="view_mode">tree,form</field>
+	</record>
 
 	<menuitem id="menu_res_country" name="Country" parent="base.menu_custom" />
 	<menuitem id="sub_menu_res_country" name="Country" parent="menu_res_country"
-		action="action_view_city" />
+		action="base.action_country" />
 	<menuitem id="menu_res_country_state" name="State"
 		parent="menu_res_country" action="action_view_state" />
 	<menuitem id="menu_res_state_city" name="City"

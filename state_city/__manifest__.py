@@ -11,6 +11,4 @@
         'city_view.xml',
         'res_view.xml',
         ],
-'uninstall_hook': 'uninstall_hook',
-'post_init_hook': 'post_init_hook',
 }
