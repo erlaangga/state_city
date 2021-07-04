@@ -8,24 +8,6 @@ def post_init_hook(cr, registry):
     env = Environment(cr, SUPERUSER_ID, {})
     dir_path = os.path.dirname(os.path.realpath(__file__))
     
-    indonesia_id = env.ref('base.id')
-    env['res.country.state'].search([('country_id', '=', indonesia_id.id)]).unlink()
-
-    with open(dir_path + '/res.country.state.csv', 'rt') as csvfile:
-        country_id = env.ref('base.id').id
-        state_values = []
-        for row in csv.DictReader(csvfile, delimiter=',', quotechar='"'):
-            state_values.append(cr.mogrify('(%s, %s, %s)', (
-                country_id, 
-                row['code'], 
-                row['name'])).decode())
-        cr.execute("""
-        WITH insert_data AS (
-            INSERT INTO res_country_state (country_id, code, name) VALUES %s RETURNING code, id)
-        INSERT INTO ir_model_data (module, name, model, res_id) SELECT 'state_city', code, 'res.country.state', id FROM insert_data RETURNING name, res_id
-        """ % ','.join(state_values))
-        state_ids = dict(cr.fetchall())
-    
     with open(dir_path + '/res.state.city.csv', 'rt') as csvfile:
         city_values = []
         for row in csv.DictReader(csvfile, delimiter=',', quotechar='"'):
